@@ -1,0 +1,11 @@
+{
+  "name": "login-frontend",
+  "version": "1.0.0",
+  "description": "Frontend for the Login System",
+  "scripts": {
+    "dev": "npx serve ."
+  },
+  "dependencies": {
+    "serve": "^14.2.0"
+  }
+}

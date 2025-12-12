@@ -1,4 +1,4 @@
-import { loginUser } from './api.js';
+import { loginUser, verifyToken, logout } from './api.js';
 import { showMessage, clearMessage, initTheme } from './ui.js';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -14,8 +14,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
         try {
             const result = await loginUser(email, password);
-            showMessage(`Login successful! Token: ${result.access_token}`, 'success');
-            console.log(result);
+            showMessage(`Login successful! JWT token stored.`, 'success');
+            console.log('JWT Token:', result.access_token);
+            
+            // Optionally verify the token immediately
+            setTimeout(async () => {
+                try {
+                    const userInfo = await verifyToken();
+                    showMessage(`Welcome ${userInfo.full_name}! Token verified.`, 'success');
+                } catch (error) {
+                    showMessage('Token verification failed', 'error');
+                }
+            }, 1000);
         } catch (error) {
             showMessage(error.message, 'error');
         }
